@@ -8,12 +8,15 @@ def likelihood(x):
 
     OUTPUT: l,  likelihood of each feature(from smallest feature to biggest feature) given by each class, C-By-N numpy array
     '''
-
     C, N = x.shape
     l = np.zeros((C, N))
-    #TODO
-
-    # begin answer
-    # end answer
-
+    t = np.sum(x, axis=1)
+    print(t)
+    r = 0
+    while r < C:
+        m=0
+        while m < N:
+            l[r][m] = x[r][m] / t[r]
+            m+=1
+        r = r + 1 
     return l
