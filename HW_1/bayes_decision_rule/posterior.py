@@ -11,17 +11,15 @@ def posterior(x):
 
     C, N = x.shape
     l = likelihood(x)
-    print('----')
-    print(x)
-    print(l)
     total = np.sum(x, axis=1)
+    total2 = np.sum(x)
     r = 0
 
 
     while r < C:
         m=0
         while m < N:
-            l[r][m] *= total[r]
+            l[r][m] *= (total[r]/total2)
             m +=1
         r+=1
 

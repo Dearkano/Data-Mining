@@ -14,8 +14,7 @@ from get_x_distribution import get_x_distribution
 
 train_x = get_x_distribution(x1_train, x2_train, data_range)
 test_x = get_x_distribution(x1_test, x2_test, data_range)
-print('-===-=-=')
-print(train_x)
+
 
 from likelihood import likelihood
 l = likelihood(train_x)
@@ -43,8 +42,6 @@ print(err)
 
 
 from posterior import posterior
-print('====')
-print(train_x)
 p = posterior(train_x)
 width = 0.35
 p1 = plt.bar(np.arange(data_range[0], data_range[1] + 1), p.T[:,0], width)
@@ -68,17 +65,24 @@ while(i < C):
 print(err)
 
 # total risk
+# all x
 
+x1_all = np.concatenate([x1_test, x1_train], 1)
+x2_all = np.concatenate([x2_test, x2_train], 1)
+x_all = get_x_distribution(x1_all, x2_all, data_range)
+x_all_posterior = posterior(x_all)
+x_all_likelihood = likelihood(x_all)
+print(x_all_likelihood)
 i = 0
 r11 = 0
 r12 = 1
 r21 = 2 
 r22 = 0
 total_risk = 0
-
+x_all_sum = np.sum(x_all)
 while i < C :
-    R1 = r11 * p[0][i] + r12 * p[1][i]
-    R2 = r21 * p[0][i] + r22 * p[1][i]
+    R1 = (r11 * x_all_posterior[0][i] + r12 * x_all_posterior[1][i]) * (x_all[0][i]+x_all[1][i]) / x_all_sum
+    R2 = (r21 * x_all_posterior[0][i] + r22 * x_all_posterior[1][i]) * (x_all[0][i]+x_all[1][i]) / x_all_sum
     if R1 < R2:
         total_risk += R1
     else:

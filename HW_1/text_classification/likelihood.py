@@ -14,6 +14,7 @@ def likelihood(x):
     #TODO
 
     # begin answer
+    l = x / (np.matrix([np.sum(x, axis=1)]).T + C)
     # end answer
 
     return l
