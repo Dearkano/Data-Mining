@@ -1,7 +1,7 @@
 import numpy as np
 
 def sigmoid(inX):
-    return 1.0/(1 + np.exp(-inX))
+    return (1 + np.exp(inX))
 
 def logistic(X, y):
     '''
@@ -13,20 +13,18 @@ def logistic(X, y):
     OUTPUT: w: learned parameters, (P+1)-by-1 column vector.
     '''
     P, N = X.shape
-    w = np.array(np.ones((P + 1, 1)))
-    r = 0.01
+    w = np.ones((P, 1))
+    r = 0.1
     l = np.matrix(y)
-    b = np.ones((1, N))
-    x = np.array(np.vstack((b, X)))
-    d = np.matrix(x)
-    iter = 100
+    step = 0.00001
+    iter = 1000
     # YOUR CODE HERE
     # begin answer
     for i in range(iter):
-        h = np.dot(d.T, w)
-        loss = h - l.T
-        g = np.dot(d, l.T) / (P + 1)
-        w = w - r * g
+        prev = w
+        w = w - r * np.sum(-y * X / ( 1 + np.exp(y * np.matmul(w.T, X))), axis=1).reshape(-1, 1)
+        if(np.linalg.norm(w-prev)<step):
+            break
     # end answer
     
     return w

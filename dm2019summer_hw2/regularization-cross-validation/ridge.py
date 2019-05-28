@@ -13,8 +13,14 @@ def ridge(X, y, lmbda):
     NOTE: You can use pinv() if the matrix is singular.
     '''
     P, N = X.shape
-    w = np.zeros((P + 1, 1))
+    w = np.zeros((P, 1))
+    x = np.array(X)
     # YOUR CODE HERE
     # begin answer
+    p1 = np.dot(x, x.T)
+    p2 = lmbda * np.eye(P,P) 
+    p3 = np.linalg.pinv(p1 + p2)
+    p4 = np.dot(p3, x) 
+    w = np.dot(p4, np.array([y]).T)
     # end answer
     return w

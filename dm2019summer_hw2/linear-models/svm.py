@@ -1,4 +1,5 @@
 import numpy as np
+from cvxopt import solvers
 
 def svm(X, y):
     '''
@@ -12,7 +13,7 @@ def svm(X, y):
 
     '''
     P, N = X.shape
-    w = np.zeros((P + 1, 1))
+    w = np.zeros((P, 1))
     num = 0
     b = np.ones((1, N))
     x = np.array(np.vstack((b, X)))
@@ -23,6 +24,12 @@ def svm(X, y):
     # it within 20 lines of code. The optimization should converge wtih any method
     # that support constrain.
     # begin answer
+    G = -y * w.T
+    q = 0
+    p = np.eye(P)
+    h = 1
+    sol = solvers.qp(p,q,G,h)
+    print(sol)
     # end answer
     return w, num
 
