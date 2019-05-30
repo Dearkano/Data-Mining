@@ -19,7 +19,10 @@ def ridge(X, y, lmbda):
     # begin answer
     p1 = np.dot(x, x.T)
     p2 = lmbda * np.eye(P,P) 
-    p3 = np.linalg.pinv(p1 + p2)
+    if(lmbda == 0):
+        p3 = np.linalg.pinv(p1 + p2)
+    else: 
+        p3 = np.linalg.inv(p1 + p2)
     p4 = np.dot(p3, x) 
     w = np.dot(p4, np.array([y]).T)
     # end answer

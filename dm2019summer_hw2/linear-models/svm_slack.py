@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.optimize import minimize
 
-def svm(X, y):
+def svm_slack(X, y):
     '''
     SVM Support vector machine.
 
@@ -21,20 +21,26 @@ def svm(X, y):
     # it within 20 lines of code. The optimization should converge wtih any method
     # that support constrain.
     # begin answer
-    def getFun(py, px):
-        return lambda W: py * np.dot(W, px) - 1
-    f = lambda W: 1/2*np.dot(W[1: ], W[1: ])
+    def getFun(py, px, i):
+        return lambda W: py * np.dot(W[0:P-N], px) - 1 + W[P-N+i]
+    def getSigFun(i):
+        return lambda W: W[P-N+i]
+    f = lambda W: 1/2*np.dot(W[1:P-N ], W[1:P-N ]) + 5 * np.sum(W[P-N:])
     c = np.array([]).tolist()
 
     for i in range(N):
         c.append({
             'type': 'ineq',
-            'fun': getFun(y[0, i], X[:, i])
+            'fun': getFun(y[0, i], X[0:P-N, i], i)
+        })
+        c.append({
+            'type': 'ineq',
+            'fun': getSigFun(i)
         })
     res = minimize(f, X[:, 0], constraints=c)
     w = res.x
     for i in range(N):
-        if(y[0, i] * np.dot(w, X[:, i])<=1.0001):
+        if(y[0, i] * np.dot(w, X[:, i])<=1.000001):
             num = num + 1
     w = np.array(w).reshape(-1, 1)
     # end answer
