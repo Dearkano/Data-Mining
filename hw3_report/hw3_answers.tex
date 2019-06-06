@@ -1,0 +1,197 @@
+%
+%
+\documentclass[12pt,twoside]{article}
+
+\input{macros}
+
+\usepackage{amsmath}
+\usepackage{url}
+\usepackage{mdwlist}
+\usepackage{graphicx}
+\usepackage{clrscode3e}
+\newcommand{\isnotequal}{\mathrel{\scalebox{0.8}[1]{!}\hspace*{1pt}\scalebox{0.8}[1]{=}}}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{float}
+\usetikzlibrary{arrows}
+\usetikzlibrary{matrix}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{trees}
+
+\usepackage{hyperref}
+\usepackage[all]{hypcap}
+\usepackage{caption}
+\usepackage{subfigure}
+\captionsetup{hypcap=true}
+
+\newcommand{\answer}{
+ \par\medskip
+ \textbf{Answer:}
+}
+
+\newcommand{\collaborators}{ \textbf{Collaborators:}
+%%% COLLABORATORS START %%%
+
+\tabT Name: Hu Jinming
+
+\tabT Student ID: xxxxxxxx
+%%% COLLABORATORS END %%%
+}
+
+\newcommand{\answerIa}{ \answer
+%%% PROBLEM 1(a) ANSWER START %%%
+
+%%% PROBLEM 1(a) ANSWER END %%%
+}
+
+\newcommand{\answerIIa}{ \answer
+%%% PROBLEM 2(a) ANSWER START %%%
+
+%%% PROBLEM 2(a) ANSWER END %%%
+}
+
+
+\newcommand{\answerIIb}{ \answer
+%%% PROBLEM 2(b) ANSWER START %%%
+
+%%% PROBLEM 2(b) ANSWER END %%%
+}
+
+\newcommand{\answerIIc}{ \answer
+	%%% PROBLEM 2(c) ANSWER START %%%
+
+	%%% PROBLEM 2(c) ANSWER END %%%
+}
+
+
+
+\newcommand{\answerIIIa}{ \answer 
+%%% PROBLEM 3(a) ANSWER START %%%
+
+%%% PROBLEM 3(a) ANSWER END %%%
+
+}
+
+\newcommand{\answerIIIIa}{ \answer
+	%%% PROBLEM 4(a) ANSWER START %%%
+	
+
+	%%% PROBLEM 4(a) ANSWER END %%%
+}
+
+\newcommand{\answerIIIIb}{ \answer
+	%%% PROBLEM 4(b) ANSWER START %%%
+	
+	
+	%%% PROBLEM 4(b) ANSWER END %%%
+}
+
+\newcommand{\answerIIIIc}{ \answer
+	%%% PROBLEM 4(c) ANSWER START %%%
+
+	%%% PROBLEM 4(c) ANSWER END %%%
+}
+
+\newcommand{\answerIIIId}{ \answer
+	%%% PROBLEM 4(d) ANSWER START %%%
+	
+	%%% PROBLEM 4(d) ANSWER END %%%
+}
+
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+
+% Fill these in!
+\newcommand{\theproblemsetnum}{3}
+\newcommand{\releasedate}{May 27, 2019}
+\newcommand{\partaduedate}{Thursday, June 13}
+\newcommand{\tabUnit}{3ex}
+\newcommand{\tabT}{\hspace*{\tabUnit}}
+
+\begin{document}
+
+\handout{Homework \theproblemsetnum}{\releasedate}
+
+%\textbf{Both theory and programming questions} are due {\bf \partaduedate} at
+%{\bf 11:59PM}.
+%
+\collaborators
+%Please download the .zip archive for this problem set.
+% Your grade will be based on both your solutions and the grading explanation.
+
+\medskip
+
+\hrulefill
+
+\begin{problems}
+
+\problem \textbf{Neural Networks}
+
+In this problem, we will implement the feedforward and backpropagation process of
+the neural networks.
+\begin{problemparts}
+\problempart 
+\answerIa
+
+\end{problemparts}
+
+\problem \textbf{K-Nearest Neighbor}
+
+In this problem, we will play with K-Nearest Neighbor (KNN) algorithm and try it on
+real-world data. Implement KNN algorithm (in \emph{knn.m}/\emph{knn.py}), then answer the following questions.
+\begin{problemparts}
+\problempart
+Try KNN with different K and plot the decision boundary.
+
+
+\answerIIa
+
+\problempart We have seen the effects of different choices of K. How can you choose a proper K
+when dealing with real-world data ?
+
+\answerIIb
+
+\problempart Finish \emph{hack.m}/\emph{hack.py} to recognize the CAPTCHA image using KNN algorithm.
+
+\answerIIc
+\end{problemparts}
+
+\problem \textbf{Decision Tree and ID3}
+
+Consider the scholarship evaluation problem: selecting scholarship recipients based on gender
+and GPA. Given the following training data:
+
+\answerIIIa
+
+
+\problem \textbf{K-Means Clustering}
+
+Finally, we will run our first unsupervised algorithm – k-means clustering.
+\begin{problemparts}
+	\problempart
+	Visualize the process of k-means algorithm for the two trials.
+	
+	\answerIIIIa
+	
+	\problempart How can we get a stable result using k-means?
+	
+	\answerIIIIb
+	
+	\problempart  Visualize the centroids.
+	
+	\answerIIIIc
+	
+	\problempart  Vector quantization.
+	
+	\answerIIIId
+	
+\end{problemparts}
+
+
+\end{problems}
+\end{document}
