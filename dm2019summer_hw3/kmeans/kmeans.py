@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import math
+np.set_printoptions(threshold=np.inf)
 
 def distance(x1, x2):
     len = x1.shape[0]
@@ -25,7 +26,7 @@ def kmeans(x, k):
     # begin answer
     N, P = x.shape
     max_iter = 30
-    idx = np.array([random.randint(0, k) for _ in range(N)])
+    idx = np.array([random.randint(0, k-1) for _ in range(N)])
     ctrs = np.zeros((k, P))
     iter_ctrs = np.zeros((max_iter, k, P))
     centers = [random.randint(0, N-1) for _ in range(k)]
@@ -35,6 +36,7 @@ def kmeans(x, k):
     for i in range(max_iter):
         print('iter={}'.format(i))
         cur_idx = np.zeros(N)
+        count = np.zeros(k)
         cluster = np.zeros((k, N, P))
         for j in range(N):
             dist = np.zeros(k)
@@ -45,18 +47,28 @@ def kmeans(x, k):
             class_ = np.argmin(dist)
             cur_idx[j] = class_
             cluster[class_, j] = p
+            count[class_] += 1
 
         cur_idx = cur_idx.astype(np.int)
-        if (cur_idx == idx).all():
+        #print(np.sum(idx))
+        #print(np.sum(cur_idx))
+        if (cur_idx==idx).all():
             print('break')
             break
         idx = cur_idx.astype(np.int)
+
         # update centers
         for j in range(k):
             samples = cluster[j]
-            m = np.sum(samples, axis=0)/N
+            #print(samples)
+            if(count[j]==0):
+                m = 0
+            else:
+                m = np.sum(samples, axis=0)/count[j]
+            #print(m)
             iter_ctrs[i, j] = m
             ctrs[j] = m
+
     totalDist = 0
     for i in range(N):
         totalDist += distance(x[i], ctrs[idx[i]])

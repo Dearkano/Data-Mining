@@ -29,18 +29,16 @@ def knn(x, x_train, y_train, k):
         for j in range(N):
             D = 0
             for s in range(P):
-                D += (x[i, s] - x_train[j, s])**2
+                D += (int(x[i, s]) - int(x_train[j, s]))**2
             dist[i, j] = math.sqrt(D)
 
     for i in range(N_test):
         tmp = np.argsort(dist[i])
-        #(tmp[0:k])
-        #print(y_train)
         C = np.zeros(P)
         for j in range(k):
-            C[y_train[tmp[j]]] += 1
-        y[i] = np.argmax(C)
-        print(C)
+            C[int(y_train[tmp[j]])] += 1
+        y[i] = np.argmax(C.astype(np.int))
+
     # end answer
 
     return y
